@@ -1,0 +1,19 @@
+{
+  "name": "trainenqiryplusplus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanshraydewangan/codefundo.git"
+  },
+  "author": "3 idiots",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sanshraydewangan/codefundo/issues"
+  },
+  "homepage": "https://github.com/sanshraydewangan/codefundo#readme"
+}
