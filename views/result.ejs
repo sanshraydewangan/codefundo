@@ -25,33 +25,17 @@
 		<td><h4>Fare</h4></td>
 	</tr>
 </table>
-
-<% var result={{json result}} %>
-
-<% for(var i=0;i<result.length;i++){%>
-<table class="table table-bordered">
-	<%
-		var suggestion = result[i];
-		for(var j=0;j<suggestion.length;j++){%>
-		<tr>
-			<td><%= suggestion[j].trainno %></td>
-			<td><%= suggestion[j].src %></td>
-			<td><%= suggestion[j].srcatime %></td>
-			<td><%= suggestion[j].srcdtime %></td>
-			<td><%= suggestion[j].dest %></td>
-			<td><%= suggestion[j].destatime %></td>
-			<td><%= suggestion[j].destdtime %></td>
-			<td><%= suggestion[j].category %></td>
-			<td><%= suggestion[j].availability %></td>
-			<td><%= suggestion[j].fare %></td>
-		</tr>
-	<%
-	}
-	%>
-</table>
-<%}
-%>
 </div>
+
+<script type="text/javascript">
+	<% ans.forEach(function(temp) { %>
+		<% var each = temp['first']; %>
+		<% var each2 = temp['second'] %>
+		$('.container').append('<table class="table table-bordered"><tr><td><%= each.trainno %></td><td><%= each.src %></td><td><%= each.srcatime %></td><td><%= each.srcdtime %></td><td><%= each.dest %></td><td><%= each.destatime %></td><td><%= each.destdtime %></td><td><%= each.category %></td><td><%= each.availability %></td><td><%= each.fare %></td></tr><tr><td><%= each2.trainno %></td><td><%= each2.src %></td><td><%= each2.srcatime %></td><td><%= each2.srcdtime %></td><td><%= each2.dest %></td><td><%= each2.destatime %></td><td><%= each2.destdtime %></td><td><%= each2.category %></td><td><%= each2.availability %></td><td><%= each2.fare %></td></tr></table>');
+
+		$('.container').append('');
+    <% }); %>
+</script>
 
 </body>
 </html>

@@ -16,12 +16,14 @@ var fs = require('fs');
 var db_file = require('./db.json');
 function get_db(format_url) {
 
-	if(db_file[format_url]==undefined){
+	if(db_file[format_url]==undefined) {
+		// console.log(format_url.substr(30, 10));
+		// console.log('coming\n');
 		var res=request('GET',format_url);
 		var jsonpkt=JSON.parse(res.getBody('utf8')); 
 
 		// console.log(jsonpkt);
-		if(format_url.substr(31, 10) != 'check-seat' && jsonpkt['response_code'] == '200') { 
+		if(format_url.substr(30, 10) != 'check-seat' && jsonpkt['response_code'] == '200') { 
 			db_file[format_url]=jsonpkt;
 			fs.writeFileSync('./db.json',JSON.stringify(db_file),'utf-8');
 		}
@@ -36,7 +38,8 @@ function gettrains(src, dest, category, age, dd, mm, yyyy) {
 	var format = 'https://api.railwayapi.com/v2/between/source/<src code>/dest/<dest code>/date/<dd-mm-yyyy>/apikey/<apikey>/';
 	var url = format.replace('<src code>', src).replace('<dest code>', dest).replace('<dd-mm-yyyy>', dd+'-'+mm+'-'+yyyy).replace('<apikey>', apikey);
 	var trains = get_db(url)['trains'];
-	
+	var result = new Array();
+
 	for(var i=0;i<trains.length;i++) {
 		format = 'https://api.railwayapi.com/v2/route/train/<train number>/apikey/<apikey>/';
 		url = format.replace('<train number>', trains[i]['number']).replace('<apikey>', apikey);
@@ -63,13 +66,14 @@ function gettrains(src, dest, category, age, dd, mm, yyyy) {
    		url = format.replace('<src code>', station).replace('<dest code>', dest).replace('<dd-mm-yyyy>', dd+'-'+mm+'-'+yyyy).replace('<apikey>', apikey);
    		var	interdest = get_db(url)['trains'];
 
-   		console.log(station);
-   		console.log(srcinter.length);
-   		console.log(interdest.length);
+   		// console.log(station);
+   		// console.log(srcinter.length);
+   		// console.log(interdest.length);
    		var firsttrains = new Array();
    		var secondtrains = new Array();
 
    		srcinter.forEach(function(train1) {
+
    			var srcatime = new Array();
    			var srcdtime = new Array();
    			var destatime = new Array(); 
@@ -106,6 +110,10 @@ function gettrains(src, dest, category, age, dd, mm, yyyy) {
 
    			for(var i=0;i<srcatime.length;i++) {
    				var temp = new Object();
+   				temp['category'] = category;
+   				temp['src'] = src;
+   				temp['dest'] = station;
+   				temp['trainno'] = train1['number']; 
    				temp['srcatime'] = srcatime[i];
    				temp['srcdtime'] = srcdtime[i];
    				temp['destatime'] = destatime[i];
@@ -154,6 +162,10 @@ function gettrains(src, dest, category, age, dd, mm, yyyy) {
 
    			for(var i=0;i<srcatime.length;i++) {
    				var temp = new Object();
+   				temp['category'] = category;
+   				temp['src'] = station;
+   				temp['dest'] = dest;
+   				temp['trainno'] = train1['number'];
    				temp['srcatime'] = srcatime[i];
    				temp['srcdtime'] = srcdtime[i];
    				temp['destatime'] = destatime[i];
@@ -162,16 +174,28 @@ function gettrains(src, dest, category, age, dd, mm, yyyy) {
    				temp['availability'] = availability[i];
    				secondtrains.push(temp);
    			}
-   			console.log(secondtrains);
    		});
-   		console.log('firsttrains');
-   		console.log('secondtrains');
+   		// console.log(firsttrains);
+   		// console.log(secondtrains);
+   		for(var i=0;i<firsttrains.length;i++) {
+   			for(var j=0;j<secondtrains.length;j++) {
+   				if(firsttrains[i]['destatime']<secondtrains[j]['srcdtime']) {
+   					// console.log(firsttrains[i]);
+   					// console.log(secondtrains[j]);
+   					// console.log('--------------------------------------');
+   					var temp = new Object();
+   					temp['first'] = firsttrains[i];
+   					temp['second'] = secondtrains[j];
+   					result.push(temp);
+   				}
+   			}
+   		}
 	});
+	return result;
 }
 
 app.get('/', function(req, res) {
-	// res.render('index.ejs');
-	gettrains('KZJ', 'MUGR', 'SL', '20', '07', '01', '2018');
+	// gettrains('OGL', 'KZJ', 'SL', '20', '08', '01', '2018');
 	res.render('index.ejs');
 });
 
@@ -179,9 +203,11 @@ app.get('/station_list.js', function(req, res) {
 	res.render('station_list.js');
 });
 
-app.get('/trainenquiry',function(req,res){
-	res.write("data received!!");
-	res.end();
+app.get('/trainenquiry', function(req,res){
+	var ans = gettrains(req.query['src'], req.query['dst'], req.query['class'], req.query['age'], req.query['date'].substr(8,2), req.query['date'].substr(5,2), req.query['date'].substr(0,4));
+	var stuff = {};
+	stuff['ans'] = ans;
+	res.render('result.ejs', stuff);
 });
 
 app.listen(8000, function() {
