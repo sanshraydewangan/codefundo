@@ -96,7 +96,13 @@ app.get('/', function(req, res) {
 	gettrains('OGL', 'KZJ', '07', '01', '2018');
 	res.render('index.ejs');
 });
-
+app.get('/station_list.js', function(req, res) {
+	res.render('station_list.js');
+});
+app.get('/trainenquiry',function(req,res){
+	res.write("data received!!");
+	res.end();
+})
 app.listen(8000, function() {
 	console.log('listening on port 8000');
 });
