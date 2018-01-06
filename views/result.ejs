@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Train enquiry System</title>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+<table class="table table-bordered">
+	<tr>
+		<td><h4>Train No.</h4></td>
+		<td><h4>Source</h4></td>
+		<td><h4>Source arrival time</h4></td>
+		<td><h4>Source departure time</h4></td>
+		<td><h4>Destination</h4></td>
+		<td><h4>Destination arrival time</h4></td>
+		<td><h4>Destination departure time</h4></td>
+		<td><h4>Category</h4></td>
+		<td><h4>Availability</h4></td>
+		<td><h4>Fare</h4></td>
+	</tr>
+</table>
+
+<% var result={{json result}} %>
+
+<% for(var i=0;i<result.length;i++){%>
+<table class="table table-bordered">
+	<%
+		var suggestion = result[i];
+		for(var j=0;j<suggestion.length;j++){%>
+		<tr>
+			<td><%= suggestion[j].trainno %></td>
+			<td><%= suggestion[j].src %></td>
+			<td><%= suggestion[j].srcatime %></td>
+			<td><%= suggestion[j].srcdtime %></td>
+			<td><%= suggestion[j].dest %></td>
+			<td><%= suggestion[j].destatime %></td>
+			<td><%= suggestion[j].destdtime %></td>
+			<td><%= suggestion[j].category %></td>
+			<td><%= suggestion[j].availability %></td>
+			<td><%= suggestion[j].fare %></td>
+		</tr>
+	<%
+	}
+	%>
+</table>
+<%}
+%>
+</div>
+
+</body>
+</html>

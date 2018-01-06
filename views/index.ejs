@@ -1,30 +1,77 @@
 <!DOCTYPE html>
 <html>
+<head>
+<title>Train enquiry System</title>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 <body>
+
+<div class="container">
 <fieldset>
 	<legend>Train Enquiry System</legend>
 <form method="get" action="/trainenquiry">
-  Source:<br>
-  <input type="text" name="src" id="src" placeholder="Enter source station code">
-  <br><br>
-  Destination:<br>
-  <input type="text" name="dst" id="dst" placeholder="Enter destination station code">
-  <br><br>
-  Date:<br>
-  <input type="date" name="date">
-  <br><br>
-  Category:<br>
-  <input type="radio" name="class" value="Sleeper" checked>Sleeper<br>
-  <input type="radio" name="class" value="AC3">AC3<br>
-  <input type="radio" name="class" value="AC2">AC2<br>
-  <input type="radio" name="class" value="AC1">AC1
-  <br><br>
-  <input type="submit" value="Submit">
+  <div class="form-group">
+  <label for="source">Source:</label>
+  <input type="text" class = "form-control" name="src" id="src" placeholder="Enter source station code">
+  </div>
+
+  <div class="form-group">
+  <label for="source">Destination:</label>
+  <input type="text" class = "form-control" name="dst" id="dst" placeholder="Enter destination station code">
+  </div>
+
+  <div class="form-group">
+  <label for="source">Age:</label>
+  <input type="number" class = "form-control" name="dst" id="dst" placeholder="Enter age of passenger">
+  </div>
+
+  <div class="form-group">
+  <label for="source">Date</label>
+  <input type="date" class="form-control" name="date">
+  </div>
+
+  <div class="form-group">
+  <label for="source">Category:</label>
+
+<div class="radio">
+  <label><input type="radio" name="class" value="SL" checked>Sleeper</label>
+</div>
+
+<div class="radio">
+  <label><input type="radio" name="class" value="3A">AC3</label>
+</div>
+
+<div class="radio">
+  <label><input type="radio" name="class" value="2A">AC2</label>
+</div>
+
+<div class="radio">
+  <label><input type="radio" name="class" value="1A">AC1</label>
+</div>
+
+<div class="radio">
+  <label><input type="radio" name="class" value="CC">AC chair car</label>
+</div>
+
+<div class="radio">
+  <label><input type="radio" name="class" value="2S">Second class sitting</label>
+</div>
+
+</div>
+
+  <button type="submit" class="btn btn-default">Submit</button>
+  
 </form> 
 </fieldset>
+</div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
 <script src="station_list.js"></script>
 <script src="lib.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
