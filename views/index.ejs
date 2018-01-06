@@ -1,1 +1,34 @@
-hello 3_idiots
+<!DOCTYPE html>
+<html>
+<body>
+<fieldset>
+	<legend>Train Enquiry System</legend>
+<form method="get" action="/trainenquiry">
+  Source:<br>
+  <input type="text" name="src" id="src" placeholder="Enter source station code">
+  <br><br>
+  Destination:<br>
+  <input type="text" name="dst" id="dst" placeholder="Enter destination station code">
+  <br><br>
+  Date:<br>
+  <input type="date" name="date">
+  <br><br>
+  Category:<br>
+  <input type="radio" name="class" value="Sleeper" checked>Sleeper<br>
+  <input type="radio" name="class" value="AC3">AC3<br>
+  <input type="radio" name="class" value="AC2">AC2<br>
+  <input type="radio" name="class" value="AC1">AC1
+  <br><br>
+  <input type="submit" value="Submit">
+</form> 
+</fieldset>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="station_list.js"></script>
+<script src="lib.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</body>
+</html>
