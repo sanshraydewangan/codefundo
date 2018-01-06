@@ -34,7 +34,7 @@ function gettrains(src, dest, dd, mm, yyyy) {
 			j++;
 		}	
 	}
-
+	console.log(stations);
 }
 
 app.get('/', function(req, res) {
