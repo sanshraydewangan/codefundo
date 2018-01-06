@@ -84,33 +84,20 @@ function gettrains(src, dest, dd, mm, yyyy) {
 	for(var i=0;i<trains.length;i++) {
 		format = 'https://api.railwayapi.com/v2/route/train/<train number>/apikey/<apikey>/';
 		url = format.replace('<train number>', trains[i]['number']).replace('<apikey>', apikey);
+		// console.log(url);
 		data = request('GET', url);
 		temp = JSON.parse(data.getBody('utf8'))['route'];
-		// var j=0;
-		// while(temp[j]['station']['code'] != src) j++;
-		// j++;
-		// while(temp[j]['station']['code'] != dest) {
-		// 	stations.add(temp[j]['station']['code']);
-		// 	j++;
-		// }
-		for(var j=0;j<temp.length;j++) {
+		// console.log(temp);
+		var j=0;
+		// console.log(temp.length);
+		while(j<temp.length && temp[j]['station']['code'] != src) j++;
+		j++;
+		while(j<temp.length && temp[j]['station']['code'] != dest) {
 			stations.add(temp[j]['station']['code']);
+			j++;
 		}	
 	}
 
-	console.log(stations);
-	// var data = '';
-	// https.get(url, (resp) => {
-	// 	resp.on('data', (chunk) => {
-	//     	data += chunk;
-	// 	});
-	// 	resp.on('end', () => {
-	// 		data = JSON.parse(data);
-	// 		aftergettingtrains(src, dest, data);
-	// 	});
-	// 	}).on("error", (err) => {
-	// 		console.log("Error: " + err.message);
-	// });
 }
 
 app.get('/', function(req, res) {
