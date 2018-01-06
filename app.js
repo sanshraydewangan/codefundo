@@ -10,7 +10,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/', function(req, res) {
 	res.render('index.ejs');
 });
-
+app.get('/station_list.js', function(req, res) {
+	res.render('station_list.js');
+});
 app.get('/trainenquiry',function(req,res){
 	res.write("data received!!");
 	res.end();
