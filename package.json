@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/sanshraydewangan/codefundo/issues"
   },
-  "homepage": "https://github.com/sanshraydewangan/codefundo#readme"
+  "homepage": "https://github.com/sanshraydewangan/codefundo#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "nodemon": "^1.14.7"
+  }
 }
