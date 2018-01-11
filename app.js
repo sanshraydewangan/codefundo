@@ -8,7 +8,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('static'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-var apikey = 'lpk3cytwri'; // '366i842wed'
+var apikey = NULL // it is a secret :P :P
 var quotacode = 'GN';
 
 //db things--------------------------
